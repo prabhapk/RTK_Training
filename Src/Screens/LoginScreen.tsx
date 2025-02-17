@@ -21,10 +21,13 @@ const userName = useSelector((state: RootState) => state.login.userName)
       setError('Only letters are allowed.');
     }
   };
-  const handleLogin = async () => {
-    dispatch(SearchUser())
-    navigation.navigate("Home")
-  };
+  // const handleLogin = async () => {
+  //   dispatch(SearchUser())
+  //   navigation.navigate("Home")
+  // };
+  const handleLogin=()=>{
+  navigation.navigate("detailsPage")
+  }
   return (
     <View style={styles.container}>
       {/* <Text variant="headlineLarge" style={styles.label}>
