@@ -15,7 +15,7 @@ const Splashscreen = ({navigation}:any) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.navigate("detailsPage");
+      navigation.navigate("Home");
     }, 2000);
 
     return () => clearTimeout(timer);

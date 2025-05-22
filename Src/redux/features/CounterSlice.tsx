@@ -8,6 +8,7 @@ export interface CounterState {
     data:any
 
 }
+ 
 
 const initialState: CounterState = {
     value: 0,
@@ -21,7 +22,16 @@ export const GetAllFunds = createAsyncThunk(
         const url = 'https://dummyjson.com/products'
         try {
             const response = await axios.get(url);
-            return response.data.products
+
+            const updatedData = response.data.products.map((item:any) => ({
+                ...item,
+                isWishlisted: false,
+                isAddedCart: false,
+                quantity: 0
+              }));
+
+              
+            return updatedData
         } catch (error: any) {
             console.log('GetAllFundsApiError', error);
            
@@ -42,6 +52,20 @@ export const counterSlice = createSlice({
         incrementByAmount: (state, action: PayloadAction<number>) => {
             state.value += action.payload
         },
+        toggleWishlist: (state, action: PayloadAction<number>) => {
+            const index = state.data.findIndex((item: { id: number }) => item.id === action.payload);
+            if (index !== -1) {
+              state.data[index].isWishlisted = !state.data[index].isWishlisted;
+            }
+          },
+          toggleAddCart: (state, action: PayloadAction<number>) => {
+            const index = state.data.findIndex((item: { id: number }) => item.id === action.payload);
+            if (index !== -1) {
+              const isNowAdded = !state.data[index].isAddedCart;
+              state.data[index].isAddedCart = isNowAdded;
+              state.data[index].quantity = isNowAdded ? 1 : 0;
+            }
+          }
     },
     extraReducers: builder => {
         // Pending stage
@@ -50,8 +74,6 @@ export const counterSlice = createSlice({
         });
         builder.addCase(GetAllFunds.fulfilled, (state, action) => {
             state.data =action.payload ;
-            console.log(state.data, "kkkkkkk")
-
           });
           builder.addCase(GetAllFunds.rejected, state => {
          
@@ -60,6 +82,6 @@ export const counterSlice = createSlice({
 })
 
 
-export const { increment, decrement, incrementByAmount, } = counterSlice.actions
+export const { increment, decrement, incrementByAmount,toggleWishlist, toggleAddCart  } = counterSlice.actions
 
 export default counterSlice.reducer

@@ -10,8 +10,6 @@ export default function Login(props: { navigation: any }) {
    props.navigation.navigate("Home")
   }
 
- 
- 
   const {value} = useSelector((state: RootState) => state.counter)
   const dispatch = useDispatch<AppDispatch>();
 
