@@ -4,10 +4,9 @@ import {
   FlatList,
   Image,
   ActivityIndicator,
-  Touchable,
   TouchableOpacity,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../redux/store';
 import {SearchUser, setLoading, setPage} from '../redux/features/LoginSlice';
@@ -15,8 +14,10 @@ import {
   GetAllFunds,
   toggleWishlist,
   toggleAddCart,
+  increment
 } from '../redux/features/CounterSlice';
 import Icon from 'react-native-vector-icons/AntDesign';
+
 const Home = ({navigation}:any) => {
   const {page, isLoading} = useSelector((state: RootState) => state.login);
   const {data} = useSelector((state: RootState) => state.counter);
@@ -111,8 +112,7 @@ const Home = ({navigation}:any) => {
   const loadMoreData = async () => {
     if (!isLoading) {
       dispatch(setLoading(true));
-      dispatch(setPage());
-      await dispatch(SearchUser());
+      dispatch( increment());
     }
   };
   return (

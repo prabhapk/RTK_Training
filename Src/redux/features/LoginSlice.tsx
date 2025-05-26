@@ -26,10 +26,9 @@ export const SearchUser = createAsyncThunk(
         const url = `https://api.github.com/search/users?q=${userName}&page=${page}&per_page=10`
         try {
             const response = await axios.get(url);
-            console.log('GetAllresponse', response);
             return response.data.items
         } catch (error: any) {
-            console.log('GetAllFundsApiError', error);   
+                throw error;   
         }
     },
 )

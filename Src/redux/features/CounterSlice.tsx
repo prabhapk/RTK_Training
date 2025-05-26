@@ -33,8 +33,7 @@ export const GetAllFunds = createAsyncThunk(
               
             return updatedData
         } catch (error: any) {
-            console.log('GetAllFundsApiError', error);
-           
+            throw error;
         }
     },
 )
