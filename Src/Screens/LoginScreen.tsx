@@ -21,31 +21,13 @@ const userName = useSelector((state: RootState) => state.login.userName)
       setError('Only letters are allowed.');
     }
   };
-  // const handleLogin = async () => {
-  //   dispatch(SearchUser())
-  //   navigation.navigate("Home")
-  // };
+
   const handleLogin=()=>{
   navigation.navigate("detailsPage")
   }
   return (
     <View style={styles.container}>
-      {/* <Text variant="headlineLarge" style={styles.label}>
-        Login
-      </Text>
-      <TextInput
-        mode="outlined"
-        label="Username"
-        placeholder="Enter your username"
-        value={username}
-        onChangeText={handleInputChange}
-        style={styles.input}
-        error={!!error}
-      />
-      {error ? <Text style={styles.errorText}>{error}</Text> : null}
-      <Button mode="contained" onPress={handleLogin} style={styles.button}>
-        Submit
-      </Button> */}
+     
       <TextInput 
       value={userName}
       onChangeText={handleInputChange}
